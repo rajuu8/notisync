@@ -31,7 +31,7 @@ public class NotificationListenerService
     public void onCreate() {
         super.onCreate();
         dbRef = FirebaseDatabase.getInstance(
-            "https://earning-app-32911-default-rtdb.firebaseio.com"
+            "https://notisync-82fce-default-rtdb.firebaseio.com"
         ).getReference("notifications");
     }
 
