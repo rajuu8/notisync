@@ -4,10 +4,7 @@ import android.app.Notification;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.database.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,33 +12,34 @@ public class NotificationListenerService
         extends android.service.notification.NotificationListenerService {
 
     private DatabaseReference dbRef;
+    private String userCode;
 
-    // Yeh apps ki notifications ignore karega (system/spam)
     private static final String[] IGNORE_PACKAGES = {
-        "android",
-        "com.android.systemui",
-        "com.android.phone",
-        "com.google.android.gms",
-        "com.android.launcher",
-        "com.miui.home",
-        "com.samsung.android.app.spage",
+        "android", "com.android.systemui", "com.android.phone",
+        "com.google.android.gms", "com.android.launcher",
+        "com.miui.home", "com.samsung.android.app.spage",
     };
 
     @Override
     public void onCreate() {
         super.onCreate();
-        dbRef = FirebaseDatabase.getInstance(
-            "https://notisync-82fce-default-rtdb.firebaseio.com"
-        ).getReference("notifications");
+
+        // User code lo
+        userCode = getSharedPreferences("notisync", MODE_PRIVATE)
+                .getString("user_code", null);
+
+        if (userCode != null) {
+            dbRef = FirebaseDatabase.getInstance(
+                "https://notisync-82fce-default-rtdb.firebaseio.com"
+            ).getReference("users").child(userCode).child("notifications");
+        }
     }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        if (sbn == null) return;
+        if (sbn == null || dbRef == null || userCode == null) return;
 
         String packageName = sbn.getPackageName();
-
-        // System notifications ignore karo
         for (String ignore : IGNORE_PACKAGES) {
             if (packageName.startsWith(ignore)) return;
         }
@@ -52,7 +50,6 @@ public class NotificationListenerService
         Bundle extras = notification.extras;
         if (extras == null) return;
 
-        // Title aur message nikalo
         CharSequence titleSeq = extras.getCharSequence(Notification.EXTRA_TITLE);
         CharSequence textSeq  = extras.getCharSequence(Notification.EXTRA_TEXT);
         CharSequence bigText  = extras.getCharSequence(Notification.EXTRA_BIG_TEXT);
@@ -61,16 +58,11 @@ public class NotificationListenerService
         String msg   = bigText  != null ? bigText.toString().trim()
                      : textSeq  != null ? textSeq.toString().trim() : "";
 
-        // Empty notifications skip karo
         if (TextUtils.isEmpty(title) && TextUtils.isEmpty(msg)) return;
 
-        // App ka naam readable banao
         String appName = getAppName(packageName);
+        String type    = determineType(packageName, title, msg);
 
-        // Type determine karo
-        String type = determineType(packageName, title, msg);
-
-        // Firebase mein save karo
         Map<String, Object> data = new HashMap<>();
         data.put("app",     appName);
         data.put("package", packageName);
@@ -83,19 +75,12 @@ public class NotificationListenerService
         dbRef.push().setValue(data);
     }
 
-    @Override
-    public void onNotificationRemoved(StatusBarNotification sbn) {
-        // Optional: jab notification dismiss ho toh kuch karo
-    }
-
-    // App ka package name se readable naam banao
     private String getAppName(String packageName) {
         try {
             android.content.pm.ApplicationInfo info =
                 getPackageManager().getApplicationInfo(packageName, 0);
             return getPackageManager().getApplicationLabel(info).toString();
         } catch (Exception e) {
-            // Package se naam nikalo (last part)
             String[] parts = packageName.split("\\.");
             if (parts.length > 0) {
                 String name = parts[parts.length - 1];
@@ -105,31 +90,20 @@ public class NotificationListenerService
         }
     }
 
-    // Notification ka type determine karo package ke hisaab se
     private String determineType(String pkg, String title, String msg) {
         if (pkg.contains("whatsapp") || pkg.contains("telegram") ||
             pkg.contains("messenger") || pkg.contains("signal") ||
             pkg.contains("instagram") || pkg.contains("twitter") ||
-            pkg.contains("snapchat") || pkg.contains("viber")) {
-            return "message";
-        }
-        if (pkg.contains("gmail") || pkg.contains("email") || pkg.contains("mail") ||
-            pkg.contains("outlook")) {
-            return "alert";
-        }
-        if (pkg.contains("calendar") || pkg.contains("clock") || pkg.contains("alarm")) {
-            return "reminder";
-        }
+            pkg.contains("snapchat")) return "message";
+        if (pkg.contains("gmail") || pkg.contains("email") ||
+            pkg.contains("mail") || pkg.contains("outlook")) return "alert";
+        if (pkg.contains("calendar") || pkg.contains("clock") ||
+            pkg.contains("alarm")) return "reminder";
         if (pkg.contains("playstore") || pkg.contains("market") ||
-            pkg.contains("update") || pkg.contains("download")) {
-            return "update";
-        }
-        // Title/msg se detect karo
+            pkg.contains("update")) return "update";
         String combined = (title + " " + msg).toLowerCase();
         if (combined.contains("offer") || combined.contains("sale") ||
-            combined.contains("discount") || combined.contains("deal")) {
-            return "promo";
-        }
+            combined.contains("discount")) return "promo";
         return "alert";
     }
 }
