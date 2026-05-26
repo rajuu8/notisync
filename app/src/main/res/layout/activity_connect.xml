@@ -4,57 +4,97 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp"
-    android:background="#F4F4F5">
+    android:background="#0F172A"
+    android:padding="28dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🔔"
-        android:textSize="60sp"
-        android:layout_marginBottom="16dp"/>
+    <!-- Logo -->
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#1E3A5F"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔔"
+            android:textSize="40sp"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NotiSync"
-        android:textSize="28sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#111111"
+        android:textColor="#F1F5F9"
         android:layout_marginBottom="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notification Dekho app se 4 digit code lo"
+        android:text="Notification Dekho app se connect karo"
         android:textSize="14sp"
-        android:textColor="#888888"
+        android:textColor="#64748B"
         android:gravity="center"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="40dp"/>
 
+    <!-- QR Scan Button -->
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="📷  QR Code Scan Karo"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2563EB"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.MaterialComponents.Button"/>
+
+    <!-- Divider -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+        <View android:layout_width="0dp" android:layout_height="1dp"
+            android:layout_weight="1" android:background="#1E293B"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  YA  "
+            android:textSize="13sp"
+            android:textColor="#475569"/>
+        <View android:layout_width="0dp" android:layout_height="1dp"
+            android:layout_weight="1" android:background="#1E293B"/>
+    </LinearLayout>
+
+    <!-- Code Input -->
     <EditText
         android:id="@+id/et_code"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:hint="0000"
-        android:textSize="36sp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:hint="4 digit code likho"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="#2563EB"
+        android:textColor="#3B82F6"
+        android:textColorHint="#334155"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="4"
-        android:background="@android:color/white"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:background="#1E293B"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/btn_connect"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:text="Connect Karo"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#2563EB"
+        android:backgroundTint="#1D4ED8"
         style="@style/Widget.MaterialComponents.Button"/>
 
 </LinearLayout>
