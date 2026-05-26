@@ -39,7 +39,6 @@
                         android:background="@drawable/bg_bell"
                         android:gravity="center"
                         android:layout_marginEnd="12dp">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -52,7 +51,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -60,34 +58,28 @@
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#111111"/>
-
                         <TextView
+                            android:id="@+id/tv_connected"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Firebase se sync ho raha hai"
+                            android:text="Code: ----"
                             android:textSize="11sp"
-                            android:textColor="#888888"/>
+                            android:textColor="#2563EB"/>
                     </LinearLayout>
 
-                    <!-- Count Badge -->
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/tv_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_badge"
+                        android:text="0"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#1D4ED8"
+                        android:background="#DBEAFE"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:paddingTop="4dp"
-                        android:paddingBottom="4dp">
-
-                        <TextView
-                            android:id="@+id/tv_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="#1D4ED8"/>
-                    </LinearLayout>
+                        android:paddingBottom="4dp"/>
                 </LinearLayout>
 
                 <!-- Status Row -->
@@ -98,14 +90,12 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/bg_status"
                     android:padding="10dp">
-
                     <View
                         android:id="@+id/status_dot"
                         android:layout_width="8dp"
                         android:layout_height="8dp"
                         android:background="@drawable/dot_green"
                         android:layout_marginEnd="8dp"/>
-
                     <TextView
                         android:id="@+id/tv_status"
                         android:layout_width="0dp"
@@ -164,66 +154,37 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- How it works Card -->
-        <androidx.cardview.widget.CardView
+        <!-- Action Buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginBottom="12dp"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="#FFFFFF"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            android:gravity="center">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+            <Button
+                android:id="@+id/btn_clear_all"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:text="Clear All"
+                android:textColor="#DC2626"
+                android:backgroundTint="#FEF2F2"
+                android:textSize="13sp"
+                android:layout_marginEnd="8dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kaise kaam karta hai?"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="#111111"
-                    android:layout_marginBottom="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1. Permission do (upar button se)"
-                    android:textSize="13sp"
-                    android:textColor="#444444"
-                    android:layout_marginBottom="6dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2. Jab bhi koi notification aayegi, yeh app automatically Firebase mein save kar dega"
-                    android:textSize="13sp"
-                    android:textColor="#444444"
-                    android:layout_marginBottom="6dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3. Apne laptop par notification-app.html kholo aur sab notifications dekho"
-                    android:textSize="13sp"
-                    android:textColor="#444444"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Clear Button -->
-        <Button
-            android:id="@+id/btn_clear_all"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Firebase se sab clear karo"
-            android:textColor="#991B1B"
-            android:backgroundTint="#FEF2F2"
-            android:textSize="14sp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            <Button
+                android:id="@+id/btn_disconnect"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:text="Disconnect"
+                android:textColor="#888888"
+                android:backgroundTint="#F4F4F5"
+                android:textSize="13sp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
