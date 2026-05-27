@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F4F5">
+    android:background="#0F172A">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +18,7 @@
             android:layout_marginBottom="12dp"
             app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#FFFFFF"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardBackgroundColor="#1E293B">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,14 +36,14 @@
                     <LinearLayout
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:background="@drawable/bg_bell"
+                        android:background="#1E3A5F"
                         android:gravity="center"
                         android:layout_marginEnd="12dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🔔"
-                            android:textSize="20sp"/>
+                            android:textSize="22sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -57,14 +57,14 @@
                             android:text="NotiSync"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#111111"/>
+                            android:textColor="#F1F5F9"/>
                         <TextView
                             android:id="@+id/tv_connected"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Code: ----"
                             android:textSize="11sp"
-                            android:textColor="#2563EB"/>
+                            android:textColor="#3B82F6"/>
                     </LinearLayout>
 
                     <TextView
@@ -74,21 +74,21 @@
                         android:text="0"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        android:textColor="#1D4ED8"
-                        android:background="#DBEAFE"
+                        android:textColor="#FFFFFF"
+                        android:background="#2563EB"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:paddingTop="4dp"
                         android:paddingBottom="4dp"/>
                 </LinearLayout>
 
-                <!-- Status Row -->
+                <!-- Status -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:background="@drawable/bg_status"
+                    android:background="#0F172A"
                     android:padding="10dp">
                     <View
                         android:id="@+id/status_dot"
@@ -101,10 +101,55 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Firebase connect ho raha hai..."
+                        android:text="Connecting..."
                         android:textSize="12sp"
-                        android:textColor="#555555"/>
+                        android:textColor="#94A3B8"/>
                 </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Audio Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#1E293B">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎙️ One Way Audio"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#F1F5F9"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_audio_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Audio ready — Phone 2 se request aane do"
+                    android:textSize="13sp"
+                    android:textColor="#888888"
+                    android:layout_marginBottom="14dp"/>
+
+                <Button
+                    android:id="@+id/btn_allow_audio"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Allow Audio"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#16A34A"
+                    android:textSize="14sp"
+                    style="@style/Widget.MaterialComponents.Button"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -115,8 +160,7 @@
             android:layout_marginBottom="12dp"
             app:cardCornerRadius="14dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="#FFFFFF"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            app:cardBackgroundColor="#1E293B">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,7 +174,7 @@
                     android:text="Notification Permission"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#111111"
+                    android:textColor="#F1F5F9"
                     android:layout_marginBottom="6dp"/>
 
                 <TextView
@@ -139,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:text="Check ho raha hai..."
                     android:textSize="13sp"
-                    android:textColor="#888888"
+                    android:textColor="#94A3B8"
                     android:layout_marginBottom="14dp"/>
 
                 <Button
@@ -158,9 +202,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp"
-            android:gravity="center">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_clear_all"
@@ -168,9 +210,8 @@
                 android:layout_weight="1"
                 android:layout_height="48dp"
                 android:text="Clear All"
-                android:textColor="#DC2626"
-                android:backgroundTint="#FEF2F2"
-                android:textSize="13sp"
+                android:textColor="#EF4444"
+                android:backgroundTint="#1E293B"
                 android:layout_marginEnd="8dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
@@ -180,11 +221,9 @@
                 android:layout_weight="1"
                 android:layout_height="48dp"
                 android:text="Disconnect"
-                android:textColor="#888888"
-                android:backgroundTint="#F4F4F5"
-                android:textSize="13sp"
+                android:textColor="#94A3B8"
+                android:backgroundTint="#1E293B"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
