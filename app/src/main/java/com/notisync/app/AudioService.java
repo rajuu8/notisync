@@ -13,7 +13,7 @@ import io.agora.rtc2.*;
 public class AudioService extends Service {
 
     private static final String AGORA_APP_ID = "f5a163996c7b4ff699c03a163c4c66a6";
-    private static final String AGORA_TOKEN  = "007eJxTYEjcGPF2oqXX1aebL5w8bbc3K+7Np+3HrKWeRmb2um/V4lJQYEgzTTQ0M7a0NEs2TzJJSzOztEw2MAYJJZskm5klmjnZimU1BDIytC6ZwMrIAIEgPgdDXn5JZnFlXjIDAwBVwCH4";
+    private static final String AGORA_TOKEN  = "007eJxTYPDcrfss67vHsxKdtW5TBR1t6hQ4oqKPRgt1diz64KrxfZYCQ5ppoqGZsaWlWbJ5kklampmlZbKBMUgo2STZzCzRLOa8WFZDICPD7yOPGRkZIBDE52PIyy/JLK7MS45PLE3JzGdgAABXdyNX";
     private static final String CHANNEL      = "notisync_audio";
 
     private RtcEngine engine;
@@ -61,7 +61,6 @@ public class AudioService extends Service {
                 }
             };
             engine = RtcEngine.create(cfg);
-            // IMPORTANT: Broadcaster mode - mic on
             engine.setChannelProfile(Constants.CHANNEL_PROFILE_LIVE_BROADCASTING);
             engine.setClientRole(Constants.CLIENT_ROLE_BROADCASTER);
             engine.enableAudio();
@@ -70,7 +69,7 @@ public class AudioService extends Service {
                 Constants.AUDIO_SCENARIO_CHATROOM
             );
             engine.muteLocalAudioStream(false);
-            engine.adjustRecordingSignalVolume(400); // Volume boost
+            engine.adjustRecordingSignalVolume(400);
         } catch (Exception e) {
             e.printStackTrace();
         }
